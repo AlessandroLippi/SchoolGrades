@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.DirectoryServices;
 
 namespace SchoolGrades
 {
@@ -72,6 +73,8 @@ namespace SchoolGrades
         internal abstract List<Answer> GetAnswersOfAQuestion(int? idQuestion);
 
         // ClassManagement
+        internal abstract bool DatabaseExsist(string DbName);
+        internal abstract void CreateDatabase();
         internal abstract void DeleteOneStudentFromClass(int? IdDeletingStudent, int? IdClass);
         internal abstract void EraseAllStudentsOfAClass(Class Class);
         internal abstract void EraseClassFromClasses(Class Class);

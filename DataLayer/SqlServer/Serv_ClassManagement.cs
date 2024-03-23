@@ -10,6 +10,38 @@ namespace SchoolGrades
 {
     internal partial class SqlServer_DataLayer : DataLayer
     {
+
+
+         internal override void CreateDatabase()
+         {
+            using (DbConnection conn = Connect())
+            {
+                DbCommand cmd = conn.CreateCommand();
+                cmd.CommandText = "Create database Schoolgrades" +";";
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+            }
+         }
+
+
+        internal override bool DatabaseExsist(string DbName)
+        {
+            using (DbConnection conn = Connect())
+            {
+                DbCommand cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT * FROM" + DbName + ";";
+
+                if (cmd.ExecuteNonQuery() == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+                cmd.Dispose();
+            }
+        }
         internal override void DeleteOneStudentFromClass(int? IdDeletingStudent, int? IdClass)
         {
             using (DbConnection conn = Connect())
