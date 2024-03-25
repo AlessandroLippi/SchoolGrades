@@ -24,21 +24,14 @@ namespace SchoolGrades
          }
 
 
-        internal override bool DatabaseExsist(string DbName)
+        internal override void DatabaseExsist(string DbName)
         {
             using (DbConnection conn = Connect())
             {
                 DbCommand cmd = conn.CreateCommand();
                 cmd.CommandText = "SELECT * FROM" + DbName + ";";
 
-                if (cmd.ExecuteNonQuery() == null)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
+                cmd.ExecuteNonQuery(); 
                 cmd.Dispose();
             }
         }
